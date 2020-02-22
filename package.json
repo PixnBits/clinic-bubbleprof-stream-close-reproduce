@@ -1,0 +1,20 @@
+{
+  "name": "@pixnbits/clinic-bubbleprof-stream-close-reproduce",
+  "version": "1.0.0",
+  "description": "_Sometimes_ [`clinic`](https://www.npmjs.com/package/clinic) bubbelprof runs into an issue:",
+  "main": "index.js",
+  "scripts": {
+    "reproduce": "npm ci && npm run apply:always-pump && npm run short-profile",
+    "apply:always-pump": "patch -s -p0 < always-pump.patch",
+    "short-profile": "clinic bubbleprof --autocannon [ -c 10 -d 2 /] -- node server.js"
+  },
+  "author": "PixnBits",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "clinic": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PixnBits/clinic-bubbleprof-stream-close-reproduce.git"
+  }
+}

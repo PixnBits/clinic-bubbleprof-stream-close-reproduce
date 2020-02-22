@@ -1,0 +1,14 @@
+diff -ruN node_modules_untouched/node-trace-log-join/index.js node_modules/node-trace-log-join/index.js
+--- node_modules_untouched/node-trace-log-join/index.js	1985-10-26 01:15:00.000000000 -0700
++++ node_modules/node-trace-log-join/index.js	2020-02-22 16:26:14.409415510 -0700
+@@ -22,7 +22,9 @@
+ 
+   function combine (files) {
+     if (!files.length) return cb(notFound('No files matching the pattern found'))
+-    if (files.length === 1) return fs.rename(files[0], output, cb)
++    // node_trace.1.log by itself usually isn't enough, so use pump always
++    // instead of trying to get node to give us node_trace.2.log too
++    // if (files.length === 1) return fs.rename(files[0], output, cb)
+ 
+     pump(
+       multistream.obj(files.map(parse)),
